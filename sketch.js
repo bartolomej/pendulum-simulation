@@ -1,13 +1,18 @@
 const sizeX = () => window.innerWidth / 2;
 const sizeY = () => window.innerHeight / 2;
 
+let ballMass = 30;
+let lineLength = 300;
+let gAccelaration = 0.01;
+let friction = 0.99;
+let startAngle = 0;
+
 let history = [];
 
 const simulation = s => {
   let canvas;
-  let size = 300;
-  let g = 9;
-  let t = 0;
+  let angle = 0.01;
+  let speed = 0;
 
   s.setup = () => {
     canvas = s.createCanvas(sizeX(), sizeY());
@@ -22,15 +27,25 @@ const simulation = s => {
     s.stroke(0);
     s.ellipse(0, 0, 10, 10);
 
-    let cosT = Math.cos(t);
-    let sinT = Math.sin(t);
+    let cosA = Math.cos(angle);
+    let sinA = Math.sin(angle);
+    let a = gAccelaration * Math.sin(angle);
+    speed += a;
+    speed *= friction;
+    angle += speed;
 
+    console.log('a: ', a);
+    console.log('v: ', speed);
+    console.log('angle: ', angle);
+    console.log('\n');
+
+    let drawCos = Math.cos(angle - Math.PI / 2);
+    let drawSin = Math.sin(angle - Math.PI / 2);
     s.strokeWeight(4);
-    s.line(0, 0, cosT * size, sinT * size);
-    s.ellipse(cosT * size, sinT * size, 10, 10);
+    s.line(0, 0, drawCos * lineLength, drawSin * lineLength);
+    s.ellipse(drawCos * lineLength, drawSin * lineLength, 10, 10);
 
-    history.push({x: cosT, y: sinT, t});
-    t += 0.01;
+    history.push({x: cosA, y: sinA, angle});
   };
 
   s.windowResized = () => {

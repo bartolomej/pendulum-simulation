@@ -7,11 +7,84 @@
 </head>
 <body>
 
-<div id="canvasContainer">
-    <div id="simulationCanvas"></div>
-    <div id="graphCanvas"></div>
+<div id="p5_loading">
+    <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+    <h1 id="loading-text">loading</h1>
 </div>
 
+<div id="container">
+    <div class="canvasRow">
+        <div id="simulationCanvas" class="frame"></div>
+        <div id="graphCanvas" class="frame"></div>
+    </div>
+    <div class="canvasRow">
+        <div id="plotCanvas" class="frame"></div>
+        <div id="controlCanvas" class="frame">
+            <div id="parameterContainer">
+                <div class="inputContainer">
+                    <p>Show vectors: </p>
+                    <input type="checkbox" id="showVectors" title="">
+                    <div id="showVectorPlaceholder"></div>
+                </div>
+                <div class="inputContainer">
+                    <p>Animation speed: </p>
+                    <input type="range" min="-10" max="10" value="50" id="speed" title="">
+                    <div id="animationSpeedPlaceholder"></div>
+                </div>
+                <div class="inputContainer">
+                    <p>Air resistance: </p>
+                    <input type="range" min="60" max="100" value="99" id="airResistance" title="">
+                    <div id="airResistancePlaceholder"></div>
+                </div>
+                <div class="inputContainer">
+                    <p>Gravitational acceleration: </p>
+                    <input type="range" min="1" max="100" value="10" id="acceleration" title="">
+                    <div id="accelerationPlaceholder"></div>
+                </div>
+                <div class="inputContainer">
+                    <p>Arm length: </p>
+                    <input type="range" min="10" max="230" value="200" id="armLength" title="">
+                    <div id="armLengthPlaceholder"></div>
+                </div>
+                <div class="inputContainer">
+                    <p>Ball mass: </p>
+                    <input type="range" min="1" max="100" value="50" id="ballMass" title="">
+                    <div id="ballMassPlaceholder"></div>
+                </div>
+                <div class="inputContainer">
+                    <p>Start angle: </p>
+                    <input type="range" min="0" max="314" value="50" id="startAngle" title="">
+                    <div id="startAnglePlaceholder"></div>
+                </div>
+                <div class="inputContainer">
+                    <p>Left plot: </p>
+                    <select>
+                        <option value="volvo">f(x)</option>
+                        <option value="saab">g(x)</option>
+                    </select>
+                    <div id="leftPlotPlaceholder"></div>
+                </div>
+                <div class="inputContainer">
+                    <input type="button" value="Reset simulation" id="resetAnimation">
+                    <input type="button" value="Default settings" id="resetVariables">
+                    <input type="button" value="Stop simulation" id="stopStartAnimation">
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    document.getElementById('container').style.display = 'none';
+
+    window.onload = () => {
+      document.getElementById('container').style.display = 'block';
+      document.getElementById('controlCanvas').style.width = '100%';
+      document.getElementById('p5_loading').style.display = 'none';
+      updateVariablesOnScreen();
+    };
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js"></script>
 <script src="sketch.js"></script>
 </body>

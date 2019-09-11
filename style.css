@@ -91,23 +91,32 @@
 #controlCanvas {
     display: flex;
     flex-direction: row;
-    padding: 40px;
 }
 
 .inputContainer {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    background-color: white;
     padding: 10px;
-    border: 1px lightslategray dashed;
+    border: 1px black solid;
+}
+
+.buttonContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    background-color: white;
+    border: 1px black solid;
 }
 
 .inputContainer p {
-    flex: 1;
+    flex: 2.5;
 }
 
 .inputContainer input {
     flex: 1;
+    height: 100%;
 }
 
 .inputContainer div {
@@ -120,4 +129,13 @@
     flex: 1;
     flex-direction: column;
     justify-content: space-between;
+    background-color: black;
+}
+
+.controlBtn {
+    height: 100%;
+    flex: 1;
+    font-size: 15px;
+    font-weight: 400;
+    border: 2px black solid;
 }

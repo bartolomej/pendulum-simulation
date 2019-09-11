@@ -21,15 +21,18 @@
         <div id="plotCanvas" class="frame"></div>
         <div id="controlCanvas" class="frame">
             <div id="parameterContainer">
+                <!-- EXTEND LATER -->
+                <!--div class="inputContainer">
+                    <p>Simulation: </p>
+                    <select>
+                        <option value="volvo">single pendulum</option>
+                        <option value="saab">double pendulum</option>
+                    </select>
+                </div-->
                 <div class="inputContainer">
                     <p>Show vectors: </p>
                     <input type="checkbox" id="showVectors" title="">
                     <div id="showVectorPlaceholder"></div>
-                </div>
-                <div class="inputContainer">
-                    <p>Animation speed: </p>
-                    <input type="range" min="-10" max="10" value="50" id="speed" title="">
-                    <div id="animationSpeedPlaceholder"></div>
                 </div>
                 <div class="inputContainer">
                     <p>Air resistance: </p>
@@ -43,7 +46,7 @@
                 </div>
                 <div class="inputContainer">
                     <p>Arm length: </p>
-                    <input type="range" min="10" max="230" value="200" id="armLength" title="">
+                    <input type="range" min="10" max="230" value="160" id="armLength" title="">
                     <div id="armLengthPlaceholder"></div>
                 </div>
                 <div class="inputContainer">
@@ -53,21 +56,33 @@
                 </div>
                 <div class="inputContainer">
                     <p>Start angle: </p>
-                    <input type="range" min="0" max="314" value="50" id="startAngle" title="">
+                    <input type="range" min="0" max="314" value="0" id="startAngle" title="">
                     <div id="startAnglePlaceholder"></div>
                 </div>
                 <div class="inputContainer">
-                    <p>Left plot: </p>
-                    <select>
-                        <option value="volvo">f(x)</option>
-                        <option value="saab">g(x)</option>
-                    </select>
-                    <div id="leftPlotPlaceholder"></div>
+                    <div style="display: flex; flex-direction: row">
+                        <p>Left plot: </p>
+                        <select id="leftPlotSelection">
+                            <option value="speed">speed(angle)</option>
+                            <option value="acceleration">acceleration(angle)</option>
+                            <option value="energy">energy(angle)</option>
+                        </select>
+                    </div>
+                    <div style="display: flex; flex-direction: row">
+                        <p>Top plot: </p>
+                        <select id="topPlotSelection">
+                            <option value="yAmplitude">Vertical amplitude</option>
+                            <option value="xAmplitude">Horizontal amplitude</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="inputContainer">
-                    <input type="button" value="Reset simulation" id="resetAnimation">
-                    <input type="button" value="Default settings" id="resetVariables">
-                    <input type="button" value="Stop simulation" id="stopStartAnimation">
+                    <input type="range" min="0" max="314" value="0" id="startAngle" title="">
+                </div>
+                <div class="buttonContainer">
+                    <input type="button" class="controlBtn" value="RESET SIMULATION" id="resetAnimation">
+                    <input type="button" class="controlBtn" value="DEFAULT SETTINGS" id="resetVariables">
+                    <input type="button" class="controlBtn" value="PAUSE SIMULATION" id="stopStartAnimation">
                 </div>
             </div>
         </div>
@@ -82,10 +97,11 @@
       document.getElementById('container').style.display = 'block';
       document.getElementById('controlCanvas').style.width = '100%';
       document.getElementById('p5_loading').style.display = 'none';
+      resetInitialState();
       updateVariablesOnScreen();
     };
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js"></script>
-<script src="sketch.js"></script>
+<script src="./p5.min.js"></script>
+<script src="./sketch.js"></script>
 </body>
 </html>
